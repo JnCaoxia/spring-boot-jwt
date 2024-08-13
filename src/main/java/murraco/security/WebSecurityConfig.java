@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/users/signin").permitAll()//
         .antMatchers("/users/signup").permitAll()//
         .antMatchers("/h2-console/**/**").permitAll()
+            .antMatchers("/tasks/**/**").permitAll()
         // Disallow everything else..
         .anyRequest().authenticated();
 
@@ -58,8 +59,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/configuration/**")//
         .antMatchers("/webjars/**")//
         .antMatchers("/public")
-        
-        // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
+            .antMatchers("/upload/**/**")
+            .antMatchers("/leave/**/**")
+            .antMatchers("/tasks/**/**")
+
+
+            // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
         .and()
         .ignoring()
         .antMatchers("/h2-console/**/**");;

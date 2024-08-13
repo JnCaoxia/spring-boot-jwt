@@ -1,9 +1,10 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    # url: jdbc:mysql://localhost:3306/user_db
+    #url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:mysql://localhost:3306/flowable?useSSL=false&characterEncoding=utf-8&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: 123456
   tomcat:
     max-wait: 20000
     max-active: 50
@@ -11,17 +12,20 @@ spring:
     min-idle: 15
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
+      show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        # dialect: org.hibernate.dialect.MySQL8Dialect
+        # dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
         id:
           new_generator_mappings: false
+  jackson:
+    default-property-inclusion: non_null
 
 server:
-   port: 8080 # This is the default port anyway, but you can change it here
+   port: 9091 # This is the default port anyway, but you can change it here
 
 security:
   jwt:
@@ -35,3 +39,4 @@ UserController:
   delete: Deletes specific user by username
   search: Returns specific user by username
   me: Returns current user's data
+
