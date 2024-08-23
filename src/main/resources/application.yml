@@ -2,6 +2,7 @@ spring:
   datasource:
     #url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     url: jdbc:mysql://localhost:3306/flowable?useSSL=false&characterEncoding=utf-8&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+    #url:  jdbc:mysql://localhost:4000/flowable?useSSL=false&characterEncoding=utf-8&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -23,6 +24,9 @@ spring:
           new_generator_mappings: false
   jackson:
     default-property-inclusion: non_null
+  redis:
+    host: localhost
+    port: 6379
 
 server:
    port: 9091 # This is the default port anyway, but you can change it here
@@ -32,6 +36,16 @@ security:
     token:
       secret-key: secret-key
       expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+rocketmq:
+  name-server: 127.0.0.1:9876 # NameServer 地址
+  producer:
+    group: my-producer-group   # 生产者组
+  consumer:
+    group: my-consumer-group   # 消费者组
+    enable-msg-trace: true     # 启用消息轨迹
+    namespace: my-namespace    # 命名空间 (可选)
+    message-model: CLUSTERING  # 消费模式 (可选，默认CLUSTERING)
+
       
 UserController:
   signin: Authenticates user and returns its JWT token.

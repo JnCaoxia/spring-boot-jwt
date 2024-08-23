@@ -1,5 +1,6 @@
 package murraco.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +35,7 @@ public class AppUser {
   private String password;
 
   @ElementCollection(fetch = FetchType.EAGER)
+//  @JsonIgnore
   List<AppUserRole> appUserRoles;
 
 }
