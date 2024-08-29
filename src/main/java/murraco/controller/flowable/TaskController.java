@@ -6,10 +6,7 @@ import org.flowable.engine.TaskService;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +27,11 @@ public class TaskController {
         return ResponseEntity.ok(tasks.stream()
                 .map(task -> new TaskDTO(task.getId(), task.getName(), task.getAssignee()))
                 .collect(Collectors.toList()));
+    }
+
+    @PostMapping("/user/api/v1/users/{userId}/reset/pwd/put/{orderId}")
+    public ResponseEntity<Void> testController(@PathVariable String orderId, @PathVariable String userId){
+        return ResponseEntity.ok().build();
     }
 
 

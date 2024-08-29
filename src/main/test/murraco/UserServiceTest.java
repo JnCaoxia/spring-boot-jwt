@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import murraco.model.AppUser;
 import murraco.model.dto.AppUserDTO;
 import murraco.rocketmq.RocketMQProducer;
+import murraco.service.UserCacheService;
 import murraco.service.UserDataService;
 import org.apache.rocketmq.common.message.Message;
 import org.junit.Test;
@@ -23,12 +24,16 @@ public class UserServiceTest {
     private UserDataService userDataService;
 
     @Autowired
+    private UserCacheService userCacheService;
+
+    @Autowired
     private RocketMQProducer rocketMQProducer;
 
     @Test
     public void testGetUserById(){
-        AppUserDTO user = userDataService.getUserById(1);
-        log.info("user:{}", user);
+
+        AppUserDTO fromCache = userCacheService.getFromCache(1, "userCache", 1000,10);
+        log.info("user1:{}", fromCache);
     }
 
     @Test
